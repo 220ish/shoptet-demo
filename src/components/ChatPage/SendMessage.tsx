@@ -1,35 +1,50 @@
+import { FormEvent, useState } from "react";
 import styled from "styled-components";
 
-const SendMessage = () => {
+type Props = {
+	sendMessage: (message: string) => Promise<void>;
+};
+
+const SendMessage = ({ sendMessage }: Props) => {
+	const [input, setInput] = useState("");
+	const onSend = (e: FormEvent) => {
+		e.preventDefault();
+		sendMessage(input);
+		setInput("");
+	};
+
 	return (
-		<Overlay className="flex flex-row space-x-5">
+		<StyledForm onSubmit={onSend}>
 			<StyledInput
 				type="text"
-				placeholder="Type your message…"
+				placeholder="Type your message..."
+				value={input}
+				onChange={(e) => setInput(e.currentTarget.value)}
 			/>
-            <StyledButton>
-                Send
-            </StyledButton>
-		</Overlay>
+			<StyledButton type="submit">Send</StyledButton>
+		</StyledForm>
 	);
 };
 
-const Overlay = styled.div`
-    padding: 16px;
-`
+const StyledForm = styled.form`
+	display: flex;
+	flex-direction: row;
+	padding: 16px;
+`;
 
 const StyledButton = styled.button`
-    border-radius: 6px;
-    padding: 8px;
-    width: 110px;
+	border-radius: 6px;
+	padding: 8px;
+	width: 110px;
+	margin-left: 10px;
 
-    background: white;
-    color: black;
+	background: white;
+	color: black;
 
-    &:hover {
-        opacity: 0.8;
-    }
-`
+	&:hover {
+		opacity: 0.8;
+	}
+`;
 
 const StyledInput = styled.input`
 	border-width: 1px;
@@ -52,4 +67,4 @@ const StyledInput = styled.input`
 	}
 `;
 
-export default SendMessage
+export default SendMessage;

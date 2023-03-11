@@ -1,17 +1,26 @@
-import IconGPT from '@components/IconGPT';
+import { RefObject, useEffect } from 'react';
+
 import styled from 'styled-components';
+import FadeIn from 'react-fade-in';
 import Moment from 'react-moment';
-import FadeIn from 'react-fade-in/lib/FadeIn';
+
+import IconGPT from '@components/IconGPT';
 
 type Props = {
 	message: string;
 	timestamp: Date;
+	ref: RefObject<HTMLDivElement>;
 };
 
-export default function ResponseMessage({ message, timestamp }: Props) {
+export default function ResponseMessage({ message, timestamp, ref }: Props) {
+    
+	useEffect(() => {
+		ref?.current?.scrollIntoView({ behavior: "smooth" })
+	}, [ref])
+
 	return (
 		<FadeIn transitionDuration={1500}>
-			<Overlay>
+			<Overlay ref={ref}>
 				<IconOverlay>
 					<IconGPT/>
 				</IconOverlay>

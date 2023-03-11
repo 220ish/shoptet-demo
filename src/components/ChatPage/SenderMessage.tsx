@@ -1,15 +1,19 @@
+import { RefObject } from 'react';
+
 import styled from 'styled-components';
+import FadeIn from 'react-fade-in';
 import Moment from 'react-moment';
 
 type Props = {
 	message: string;
 	timestamp: Date;
+	ref: RefObject<HTMLDivElement>;
 };
 
-export default function SenderMessage({ message, timestamp }: Props) {
+export default function SenderMessage({ message, timestamp, ref }: Props) {
 	return (
-		<div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-			<div>
+		<FadeIn transitionDuration={1500} className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+			<div ref={ref}>
 				<MessageOverlay>
 					<MessageContent>
 						{message}
@@ -19,24 +23,9 @@ export default function SenderMessage({ message, timestamp }: Props) {
                     <Moment interval={1000} date={timestamp} fromNow/>
                 </StyledTimestamp>
 			</div>
-		</div>
+		</FadeIn>
 	);
 }
-
-const Overlay = styled.div`
-	display: flex;
-	justify-content: flex-end;
-
-	width: 100%;
-	max-width: 320px;
-	
-	margin-top: 8px;
-	margin-left: auto;	
-
-	--space-x-reverse: 0;
-    margin-right: calc(0.75rem * var(--space-x-reverse));
-    margin-left: calc(0.75rem * calc(1 - var(--space-x-reverse)));
-`
 
 const MessageContent = styled.p`
 	font-size: 14px;

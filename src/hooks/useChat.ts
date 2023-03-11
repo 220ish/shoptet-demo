@@ -56,7 +56,10 @@ const useChat = () => {
             const lastMessage = getLastParentId()
             const response = await fetch("/api/chat/prompt", {
                 method: "POST",
-                body: new URLSearchParams({
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
                     prompt: message,
                     parentId: lastMessage
                 }).toString()

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import SenderMessage from "./SenderMessage";
 import ResponseMessage from "./ResponseMessage";
@@ -8,9 +8,8 @@ import useChat from "@hooks/useChat";
 import SendMessage from "./SendMessage";
 
 const ChatWindow = () => {
-
-    const [message, setMessage] = useState<string>("")
     const { messages, sendMessage } = useChat()
+    const messageRef = useRef<HTMLDivElement>(null)
 
 	return (
 		<main className="flex flex-col items-center h-screen justify-center">
@@ -19,12 +18,12 @@ const ChatWindow = () => {
                     {
                         messages.map(message => (
                             message.type == "response"
-                            ? <ResponseMessage key={message.content} message={message.content} timestamp={message.timestamp}/>
-                            : <SenderMessage key={message.content} message={message.content} timestamp={message.timestamp}/>
+                            ? <ResponseMessage ref={messageRef} key={message.content} message={message.content} timestamp={message.timestamp}/>
+                            : <SenderMessage ref={messageRef} key={message.content} message={message.content} timestamp={message.timestamp}/>
                         ))
                     }
 				</div>
-				<SendMessage/>
+				<SendMessage sendMessage={sendMessage}/>
 			</div>
 		</main>
 	);
