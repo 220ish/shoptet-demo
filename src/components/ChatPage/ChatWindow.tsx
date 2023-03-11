@@ -13,8 +13,8 @@ const ChatWindow = () => {
 
 	return (
 		<MainOverlay>
-			<div className="flex flex-col w-full max-w-xl border border-[#333] rounded-xl overflow-hidden h-[80%]">
-				<div className="flex flex-col flex-grow h-0 p-8 overflow-auto">
+			<ChatWindowOverlay>
+				<MessagesContainer>
                     {
                         messages.map(message => (
                             message.type == "response"
@@ -22,22 +22,45 @@ const ChatWindow = () => {
                             : <SenderMessage ref={messageRef} key={message.content} message={message.content} timestamp={message.timestamp}/>
                         ))
                     }
-				</div>
+				</MessagesContainer>
 				<SendMessage sendMessage={sendMessage}/>
-			</div>
+			</ChatWindowOverlay>
 		</MainOverlay>
 	);
 };
 
 const MainOverlay = styled.main`
     display: flex;
+    overflow: hidden;
     flex-direction: column;
     
     height: 100vh;
 
     align-items: center;
     justify-content: center;
+`
 
+const ChatWindowOverlay = styled.div`
+    display: flex;
+    flex-direction: column;
+    
+    height: 80%;
+    width: 100%;
+    max-width: 36rem;
+
+    border-width: 1px;
+    border-color: #333;
+    border-radius: 12px;
+`
+
+const MessagesContainer = styled.div`
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+    flex-grow: 1;
+
+    height: 0px;
+    padding: 32px;
 `
 
 export default ChatWindow;
