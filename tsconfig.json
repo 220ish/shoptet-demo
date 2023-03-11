@@ -20,7 +20,16 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@middlewares/*": ["./src/middlewares/*"],
+      "@components/*": ["./src/components/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@types": ["./src/types/index"],
+      "@api/*": ["./src/pages/api/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@lib/*": ["./src/lib/*"],
+      
+      "@data/private": ["./src/data/variables.private"],
+      "@data/public": ["./src/data/variables.public"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
