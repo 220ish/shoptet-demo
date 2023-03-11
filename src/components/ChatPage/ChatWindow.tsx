@@ -1,19 +1,19 @@
-import styled from "styled-components";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 import SenderMessage from "./SenderMessage";
 import ResponseMessage from "./ResponseMessage";
 
 import useChat from "@hooks/useChat";
 import SendMessage from "./SendMessage";
+import styled from "styled-components";
 
 const ChatWindow = () => {
     const { messages, sendMessage } = useChat()
     const messageRef = useRef<HTMLDivElement>(null)
 
 	return (
-		<main className="flex flex-col items-center h-screen justify-center">
-			<div className="flex flex-col w-full max-w-xl bg-black border border-[#333] shadow-xl rounded-xl overflow-hidden h-[80%]">
+		<MainOverlay>
+			<div className="flex flex-col w-full max-w-xl border border-[#333] rounded-xl overflow-hidden h-[80%]">
 				<div className="flex flex-col flex-grow h-0 p-8 overflow-auto">
                     {
                         messages.map(message => (
@@ -25,8 +25,19 @@ const ChatWindow = () => {
 				</div>
 				<SendMessage sendMessage={sendMessage}/>
 			</div>
-		</main>
+		</MainOverlay>
 	);
 };
+
+const MainOverlay = styled.main`
+    display: flex;
+    flex-direction: column;
+    
+    height: 100vh;
+
+    align-items: center;
+    justify-content: center;
+
+`
 
 export default ChatWindow;

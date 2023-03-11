@@ -1,4 +1,4 @@
-import { RefObject, useEffect } from 'react';
+import { RefObject, } from 'react';
 
 import styled from 'styled-components';
 import FadeIn from 'react-fade-in';
@@ -13,10 +13,6 @@ type Props = {
 };
 
 export default function ResponseMessage({ message, timestamp, ref }: Props) {
-    
-	useEffect(() => {
-		ref?.current?.scrollIntoView({ behavior: "smooth" })
-	}, [ref])
 
 	return (
 		<FadeIn transitionDuration={1500}>
