@@ -20,15 +20,15 @@ export const AppLayout = ({ children }: LayoutProps) => {
 	const { status } = useSession();
 	const { replace } = useRouter();
 
-	// useEffect(() => {
-	// 	if (status === "unauthenticated") {
-	// 		replace("/");
-	// 	}
-	// }, [status, replace]);
+	useEffect(() => {
+		if (status === "unauthenticated") {
+			replace("/");
+		}
+	}, [status, replace]);
 
-	// if (status !== "authenticated") {
-	// 	return null;
-	// }
+	if (status !== "authenticated") {
+		return null;
+	}
 
 	return (
 		<FadeIn transitionDuration={1000}>
