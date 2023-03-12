@@ -46,6 +46,7 @@ const useChat = () => {
 
     const sendMessage = async (message: string) => {
         try {
+            if (!message) return;
             // sorry for this mess, too tired, will clean up later
             setMessages(state => [...state, {
                 type: "sender",
