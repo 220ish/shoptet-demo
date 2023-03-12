@@ -13,7 +13,7 @@ const ApiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
         const response = await ChatGPT.sendMessage(prompt, {
-            parentMessageId: parentId
+            // parentMessageId: parentId
         })
 
         return res.json({
