@@ -1,5 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth";
+import { NEXTAUTH_SECRET } from "@data/private";
 
 type ICredentials = Record<"username" | "password", string> | undefined;
 
@@ -15,6 +16,7 @@ const demoValidator = (input: ICredentials): boolean => {
 };
 
 export default NextAuth({
+	secret: NEXTAUTH_SECRET,
 	providers: [
 		CredentialsProvider({
 			name: "Credentials",
