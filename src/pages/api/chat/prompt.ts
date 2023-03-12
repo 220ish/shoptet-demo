@@ -3,6 +3,7 @@ import ChatGPT from "@lib/gpt"
 
 const ApiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { prompt, parentId } = req.body || req.query
+    // parentId to parentMessageId
 
     if (!prompt) {
         return res.status(400).json({
