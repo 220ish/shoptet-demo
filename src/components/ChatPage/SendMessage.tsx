@@ -17,7 +17,7 @@ const SendMessage = ({ sendMessage }: Props) => {
 		<StyledForm onSubmit={onSend}>
 			<StyledInput
 				type="text"
-				placeholder="Type your message..."
+				placeholder="Type your message... (ex. What is Shoptet?)"
 				value={input}
 				onChange={(e) => setInput(e.currentTarget.value)}
 			/>
